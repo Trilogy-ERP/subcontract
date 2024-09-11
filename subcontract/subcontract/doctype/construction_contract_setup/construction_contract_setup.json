@@ -1,0 +1,116 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-09-06 20:36:13.071502",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "account_section",
+  "deduction_and_additional",
+  "value_added_tax",
+  "business_insurance",
+  "relative_stamp_duty",
+  "other_deduction",
+  "column_break_fize",
+  "non_temporary_employee",
+  "source_tax",
+  "accounts_payable",
+  "accounts_receivable"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "account_section",
+   "fieldtype": "Section Break",
+   "label": "Account"
+  },
+  {
+   "fieldname": "deduction_and_additional",
+   "fieldtype": "Link",
+   "label": "Deduction and Additional",
+   "options": "Account"
+  },
+  {
+   "fieldname": "value_added_tax",
+   "fieldtype": "Link",
+   "label": "Value Added Tax  ",
+   "options": "Account"
+  },
+  {
+   "fieldname": "business_insurance",
+   "fieldtype": "Link",
+   "label": "Business Insurance ",
+   "options": "Account"
+  },
+  {
+   "fieldname": "relative_stamp_duty",
+   "fieldtype": "Link",
+   "label": "Relative Stamp Duty",
+   "options": "Account"
+  },
+  {
+   "fieldname": "other_deduction",
+   "fieldtype": "Link",
+   "label": "Other Deduction ",
+   "options": "Account"
+  },
+  {
+   "fieldname": "column_break_fize",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "non_temporary_employee",
+   "fieldtype": "Link",
+   "label": "Non Temporary Employee ",
+   "options": "Account"
+  },
+  {
+   "fieldname": "source_tax",
+   "fieldtype": "Link",
+   "label": "Source Tax  ",
+   "options": "Account"
+  },
+  {
+   "fieldname": "accounts_payable",
+   "fieldtype": "Link",
+   "label": "Accounts Payable  ",
+   "options": "Account"
+  },
+  {
+   "fieldname": "accounts_receivable",
+   "fieldtype": "Link",
+   "label": "Accounts Receivable  ",
+   "options": "Account"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-09-06 20:36:13.071502",
+ "modified_by": "Administrator",
+ "module": "subcontract",
+ "name": "Construction Contract Setup",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

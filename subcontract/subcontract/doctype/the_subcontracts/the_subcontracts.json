@@ -1,0 +1,242 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-09-06 13:31:43.254341",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "contractor_type",
+  "contractor",
+  "company",
+  "column_break_sjtt",
+  "posting_date",
+  "start_contract_date",
+  "end_contract_date",
+  "contracts",
+  "subcontract_type",
+  "account_dimention_section",
+  "project",
+  "column_break_unrn",
+  "cost_center",
+  "subcontract_items_section",
+  "items",
+  "section_break_tgih",
+  "net_total",
+  "taxes_and_charging_section",
+  "percentage_of_tax_deduction_and_addition",
+  "percentage_of_value_added_tax",
+  "percentage_of_business_insurance",
+  "percentage_of_business_insurance__copy",
+  "percentage_of_current_organization",
+  "column_break_yift",
+  "relative_stamp_duty",
+  "non_temporary_employment",
+  "other_deduction",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "Subcontract-.YYYY.-"
+  },
+  {
+   "fieldname": "contractor_type",
+   "fieldtype": "Link",
+   "label": "Contractor Type ",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contractor",
+   "fieldtype": "Dynamic Link",
+   "label": "Contractor ",
+   "options": "contractor_type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_sjtt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_contract_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "end_contract_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date ",
+   "reqd": 1
+  },
+  {
+   "fieldname": "subcontract_type",
+   "fieldtype": "Select",
+   "label": "Subcontract Type",
+   "options": "\nCurrent\nFinal"
+  },
+  {
+   "fieldname": "account_dimention_section",
+   "fieldtype": "Section Break",
+   "label": "Account Dimention"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "column_break_unrn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "subcontract_items_section",
+   "fieldtype": "Section Break",
+   "label": "Subcontract Items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Contracts Items",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_tgih",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "net_total",
+   "fieldtype": "Currency",
+   "label": "Net Total"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "taxes_and_charging_section",
+   "fieldtype": "Section Break",
+   "label": "Taxes and Charging"
+  },
+  {
+   "fieldname": "percentage_of_tax_deduction_and_addition",
+   "fieldtype": "Percent",
+   "label": "Percentage of Tax Deduction and Addition"
+  },
+  {
+   "fieldname": "percentage_of_value_added_tax",
+   "fieldtype": "Percent",
+   "label": "Percentage of Value Added Tax"
+  },
+  {
+   "fieldname": "percentage_of_business_insurance",
+   "fieldtype": "Percent",
+   "label": "Percentage of Business Insurance "
+  },
+  {
+   "fieldname": "percentage_of_business_insurance__copy",
+   "fieldtype": "Percent",
+   "label": "Percentage of Business Insurance  Copy"
+  },
+  {
+   "fieldname": "percentage_of_current_organization",
+   "fieldtype": "Percent",
+   "label": "Percentage of Current Organization"
+  },
+  {
+   "fieldname": "column_break_yift",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "relative_stamp_duty",
+   "fieldtype": "Data",
+   "label": "Relative Stamp Duty"
+  },
+  {
+   "fieldname": "non_temporary_employment",
+   "fieldtype": "Data",
+   "label": "Non Temporary Employment"
+  },
+  {
+   "fieldname": "other_deduction",
+   "fieldtype": "Data",
+   "label": "Other Deduction"
+  },
+  {
+   "fieldname": "contracts",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "label": "Contracts",
+   "options": "Contract-.YYYY.-",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "The Subcontracts",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Payment Entry",
+   "link_fieldname": "Company"
+  },
+  {
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "Company"
+  }
+ ],
+ "modified": "2024-09-08 23:28:40.743114",
+ "modified_by": "Administrator",
+ "module": "subcontract",
+ "name": "The Subcontracts",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

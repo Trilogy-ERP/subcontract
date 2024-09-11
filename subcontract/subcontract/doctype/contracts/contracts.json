@@ -1,0 +1,254 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-09-06 19:03:31.973475",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "amended_from",
+  "clearance_type",
+  "contractor_type",
+  "contractor",
+  "company",
+  "column_break_asxl",
+  "contract_status",
+  "start_contract_date",
+  "end_contract_date",
+  "posting_date",
+  "account_dimention_section",
+  "project",
+  "column_break_sgii",
+  "cost_center",
+  "contract_items_section",
+  "table_itfa",
+  "payment_terms_section",
+  "payment_terms_template",
+  "payment_sechedule",
+  "term_and_conditions_section",
+  "terms",
+  "terms_and_conditions_details",
+  "taxes_and_charging_section",
+  "percentage_of_tax_deduction_and_addition",
+  "percentage_of_value_added_tax",
+  "percentage_of_business_insurance",
+  "percentage_of_current_organization",
+  "column_break_jufq",
+  "relative_stamp_duty",
+  "non_temporary_employment",
+  "other_deduction"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "Contract-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Contracts",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "clearance_type",
+   "fieldtype": "Select",
+   "label": "Clearance Type",
+   "options": "\nIncoming\nOutgoing",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contractor_type",
+   "fieldtype": "Link",
+   "label": "Contractor Type ",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "contractor",
+   "fieldtype": "Dynamic Link",
+   "label": "Contractor ",
+   "options": "contractor_type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_asxl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "contract_status",
+   "fieldtype": "Select",
+   "label": "Contract Status",
+   "options": "Open\nPending"
+  },
+  {
+   "fieldname": "start_contract_date",
+   "fieldtype": "Date",
+   "label": "Start Contract Date"
+  },
+  {
+   "fieldname": "end_contract_date",
+   "fieldtype": "Date",
+   "label": "End Contract Date "
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date ",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "account_dimention_section",
+   "fieldtype": "Section Break",
+   "label": "Account Dimention"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "column_break_sgii",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "contract_items_section",
+   "fieldtype": "Section Break",
+   "label": "Contract Items"
+  },
+  {
+   "fieldname": "table_itfa",
+   "fieldtype": "Table",
+   "label": "Contracts items",
+   "options": "Contracts Items",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "payment_terms_section",
+   "fieldtype": "Section Break",
+   "label": "Payment Terms"
+  },
+  {
+   "fieldname": "payment_terms_template",
+   "fieldtype": "Link",
+   "label": "Payment Terms Template",
+   "options": "Payment Terms Template"
+  },
+  {
+   "fieldname": "payment_sechedule",
+   "fieldtype": "Table",
+   "label": "Payment Sechedule",
+   "options": "Payment Terms Template Detail"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "term_and_conditions_section",
+   "fieldtype": "Section Break",
+   "label": "Term and Conditions"
+  },
+  {
+   "fieldname": "terms",
+   "fieldtype": "Attach",
+   "label": "Terms"
+  },
+  {
+   "fieldname": "terms_and_conditions_details",
+   "fieldtype": "Text Editor",
+   "label": "Terms and Conditions Details"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "taxes_and_charging_section",
+   "fieldtype": "Section Break",
+   "label": "Taxes and Charging"
+  },
+  {
+   "fieldname": "percentage_of_tax_deduction_and_addition",
+   "fieldtype": "Percent",
+   "label": "Percentage of Tax Deduction and Addition"
+  },
+  {
+   "fieldname": "percentage_of_value_added_tax",
+   "fieldtype": "Percent",
+   "label": "Percentage of Value Added Tax"
+  },
+  {
+   "fieldname": "percentage_of_business_insurance",
+   "fieldtype": "Percent",
+   "label": "Percentage of Business Insurance "
+  },
+  {
+   "fieldname": "percentage_of_current_organization",
+   "fieldtype": "Percent",
+   "label": "Percentage of Current Organization"
+  },
+  {
+   "fieldname": "column_break_jufq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "relative_stamp_duty",
+   "fieldtype": "Data",
+   "label": "Relative Stamp Duty"
+  },
+  {
+   "fieldname": "non_temporary_employment",
+   "fieldtype": "Data",
+   "label": "Non Temporary Employment"
+  },
+  {
+   "fieldname": "other_deduction",
+   "fieldtype": "Data",
+   "label": "Other Deduction"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-09-08 20:19:01.131235",
+ "modified_by": "Administrator",
+ "module": "subcontract",
+ "name": "Contracts",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
