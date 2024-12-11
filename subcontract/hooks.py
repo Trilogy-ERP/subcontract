@@ -5,6 +5,40 @@ app_description = "subcontrac"
 app_email = "aya@gmail.com"
 app_license = "mit"
 
+doctype_js = {
+    "The Subcontracts": "public/js/the_subcontracts.js",
+    "Payment Entry": "public/js/update_payment.js"
+}
+
+override_doctype_class = {
+"Payment Entry": "subcontract.overrides.payment_entry.CustomPaymentEntry"
+}
+override_whitelisted_methods = {
+    "erpnext.accounts.doctype.payment_entry.payment_entry.make_payment_entry": 
+    "subcontract.subcontract.overrides.payment_entry.make_payment_entry"
+    # "subcontract.subcontract.overrides.payment_entry.CustomPaymentEntry.on_submit"
+
+}
+# override_doctype_dashboards = {
+#     "The Subcontracts": "subcontract.overrides.payment_entry"
+# }
+
+
+# doc_events = {
+#     "Payment Entry": {
+#         "on_submit": "subcontract.subcontract.payment_entry.update_subcontract_status"
+#     }
+# }
+
+
+# doc_events = {
+#     "Contracts": {
+#         "on_update": "subcontract.api.update_percentage_of_completion"
+#     }
+# }
+
+
+
 # Apps
 # ------------------
 
