@@ -7,6 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
+  "name1",
   "amended_from",
   "clearance_type",
   "contractor_type",
@@ -23,6 +24,8 @@
   "cost_center",
   "contract_items_section",
   "table_itfa",
+  "total_amount",
+  "grand_total_amount",
   "payment_terms_section",
   "payment_terms_template",
   "payment_sechedule",
@@ -34,10 +37,13 @@
   "percentage_of_value_added_tax",
   "percentage_of_business_insurance",
   "percentage_of_current_organization",
-  "column_break_jufq",
-  "relative_stamp_duty",
-  "non_temporary_employment",
-  "other_deduction"
+  "other_deduction",
+  "column_break_tqna",
+  "tax_deduction_amount",
+  "vat_amount",
+  "business_insurance_amount",
+  "current_organization_amount",
+  "deductions_amount"
  ],
  "fields": [
   {
@@ -180,7 +186,6 @@
    "label": "Terms and Conditions Details"
   },
   {
-   "collapsible": 1,
    "fieldname": "taxes_and_charging_section",
    "fieldtype": "Section Break",
    "label": "Taxes and Charging"
@@ -206,29 +211,79 @@
    "label": "Percentage of Current Organization"
   },
   {
-   "fieldname": "column_break_jufq",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "relative_stamp_duty",
-   "fieldtype": "Data",
-   "label": "Relative Stamp Duty"
-  },
-  {
-   "fieldname": "non_temporary_employment",
-   "fieldtype": "Data",
-   "label": "Non Temporary Employment"
-  },
-  {
    "fieldname": "other_deduction",
    "fieldtype": "Data",
    "label": "Other Deduction"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_tqna",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tax_deduction_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Tax Deduction Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vat_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "VAT Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "business_insurance_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Business Insurance Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "current_organization_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Current Organization Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grand_total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Grand Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "deductions_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Deductions Amount",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2024-09-08 20:19:01.131235",
+ "links": [
+  {
+   "link_doctype": "The Subcontracts",
+   "link_fieldname": "Contracts"
+  }
+ ],
+ "modified": "2024-12-03 15:50:12.544663",
  "modified_by": "Administrator",
  "module": "subcontract",
  "name": "Contracts",

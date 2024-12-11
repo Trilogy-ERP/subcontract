@@ -52,6 +52,7 @@
   {
    "fieldname": "relative_stamp_duty",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Relative Stamp Duty",
    "options": "Account"
   },
@@ -74,6 +75,7 @@
   {
    "fieldname": "source_tax",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Source Tax  ",
    "options": "Account"
   },
@@ -93,7 +95,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-09-06 20:36:13.071502",
+ "modified": "2024-11-28 09:26:23.053257",
  "modified_by": "Administrator",
  "module": "subcontract",
  "name": "Construction Contract Setup",

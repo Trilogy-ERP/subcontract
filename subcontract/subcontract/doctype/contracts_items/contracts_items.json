@@ -4,20 +4,23 @@
  "creation": "2024-09-06 18:23:12.502120",
  "default_view": "List",
  "doctype": "DocType",
+ "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "business_item",
   "item_name",
+  "item_description",
   "uom",
   "quantity",
   "rate",
   "amount",
-  "complete_rate",
-  "item_description",
-  "percentage_of_completion"
+  "percentage_of_completion",
+  "remaining_quantity",
+  "remaining_amount"
  ],
  "fields": [
   {
+   "fetch_from": "business_item.item_name",
    "fieldname": "item_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -25,6 +28,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "business_item.stock_uom",
    "fieldname": "uom",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -40,6 +44,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "rate",
    "fieldtype": "Currency",
    "in_list_view": 1,
@@ -47,10 +52,12 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Amount"
+   "label": "Amount",
+   "read_only": 1
   },
   {
    "fieldname": "business_item",
@@ -61,27 +68,38 @@
    "reqd": 1
   },
   {
+   "fetch_from": "business_item.description",
    "fieldname": "item_description",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Item Description"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "percentage_of_completion",
    "fieldtype": "Percent",
    "in_list_view": 1,
    "label": "Percentage of Completion"
   },
   {
-   "fieldname": "complete_rate",
-   "fieldtype": "Float",
-   "label": "Complete Rate"
+   "allow_on_submit": 1,
+   "fieldname": "remaining_quantity",
+   "fieldtype": "Data",
+   "label": "Remaining Quantity",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "remaining_amount",
+   "fieldtype": "Data",
+   "label": "Remaining Amount",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-08 23:43:02.353063",
+ "modified": "2024-12-03 11:07:35.811644",
  "modified_by": "Administrator",
  "module": "subcontract",
  "name": "Contracts Items",

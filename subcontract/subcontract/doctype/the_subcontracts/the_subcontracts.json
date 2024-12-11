@@ -16,6 +16,7 @@
   "start_contract_date",
   "end_contract_date",
   "contracts",
+  "contract_name",
   "subcontract_type",
   "account_dimention_section",
   "project",
@@ -25,6 +26,8 @@
   "items",
   "section_break_tgih",
   "net_total",
+  "payment",
+  "remaining_total_amount",
   "taxes_and_charging_section",
   "percentage_of_tax_deduction_and_addition",
   "percentage_of_value_added_tax",
@@ -130,6 +133,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "net_total",
    "fieldtype": "Currency",
    "label": "Net Total"
@@ -186,11 +190,11 @@
   },
   {
    "fieldname": "contracts",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_filter": 1,
    "in_list_view": 1,
    "label": "Contracts",
-   "options": "Contract-.YYYY.-",
+   "options": "Contracts",
    "read_only": 1
   },
   {
@@ -202,6 +206,31 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fetch_from": "contracts.name1",
+   "fieldname": "contract_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contract Name",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "payment",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Payment",
+   "options": "Unpaid\nPaid\nPartially Paid",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "remaining_total_amount",
+   "fieldtype": "Currency",
+   "label": "Remaining Total Amount"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -209,14 +238,14 @@
  "links": [
   {
    "link_doctype": "Payment Entry",
-   "link_fieldname": "Company"
+   "link_fieldname": "subcontract"
   },
   {
-   "link_doctype": "Journal Entry",
-   "link_fieldname": "Company"
+   "link_doctype": "Sales Invoice",
+   "link_fieldname": "company"
   }
  ],
- "modified": "2024-09-08 23:28:40.743114",
+ "modified": "2024-12-11 11:15:34.199269",
  "modified_by": "Administrator",
  "module": "subcontract",
  "name": "The Subcontracts",

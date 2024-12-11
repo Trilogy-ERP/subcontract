@@ -210,26 +210,8 @@ frappe.ui.form.on('The Subcontracts', {
         }
     },
 
-    on_submit: async function (frm) {
-        try {
-            const contract_name = frm.doc.contracts;
 
-            if (!contract_name) {
-                return;
-            }
-
-            // تحديث القيم في العقد الرئيسي
-            await update_contract_values(contract_name);
-        } catch (error) {
-            console.error(error);
-        }
-    },
-        after_save: function(frm) {
-        if (frm.doc.net_total !== undefined && frm.doc.remaining_total_amount !== frm.doc.net_total) {
-            frm.set_value('remaining_total_amount', frm.doc.net_total);
-            frm.save(); // حفظ المستند تلقائيًا بعد التحديث
-        }
-    } 
+    
 });
 
 async function validate_subcontract_items(contract_name, frm) {
