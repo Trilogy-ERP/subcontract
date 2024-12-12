@@ -1,6 +1,5 @@
 frappe.ui.form.on('The Subcontracts', {
     refresh: function(frm) {
-        // تعيين الفلترة بناءً على Contractor Type
         frm.set_query('contractor', function() {
             if (frm.doc.contractor_type === 'Supplier') {
                 return {
@@ -92,7 +91,6 @@ frappe.ui.form.on('The Subcontracts', {
     },
 
     contractor_type: function(frm) {
-        // تغيير الفلترة عندما تتغير قيمة Contractor Type
         frm.set_query('contractor', function() {
             if (frm.doc.contractor_type === 'Supplier') {
                 return {
@@ -120,26 +118,19 @@ frappe.ui.form.on('The Subcontracts', {
             update_percentage_of_completion(frm);
             calculate_net_total(frm);
             check_completion_percentage(frm);
+                frm.doc.items.forEach(item => {
+                let quantity = parseFloat(item.quantity) || 0;
+                let rate = item.rate || 0; 
     
-            // ضرب quantity في rate وتخزين النتيجة في amount
-            frm.doc.items.forEach(item => {
-                // التأكد من تحويل quantity إلى float
-                let quantity = parseFloat(item.quantity) || 0;  // إذا كانت قيمة quantity فارغة أو غير صحيحة نستخدم 0
-                let rate = item.rate || 0; // إذا كانت قيمة rate فارغة نستخدم 0
-    
-                // حساب المبلغ (amount)
                 let amount = quantity * rate;
     
-                // تحديث الحقل amount في كل صف داخل الجدول
                 item.amount = amount;
             });
         }
     ,
     on_save: function(frm) {
         try {
-            // التأكد من أن قيمة net_total موجودة
             if (frm.doc.net_total !== undefined) {
-                // تعيين قيمة remaining_total_amount لتساوي قيمة net_total
                 frm.set_value('remaining_total_amount', frm.doc.net_total);
             }
         } catch (error) {
@@ -177,7 +168,6 @@ function calculate_net_total(frm) {
     frm.refresh_field('net_total');
 }
 
-// دالة للتحقق من أن نسبة الاكتمال ليست 100% لكل العناصر
 function check_completion_percentage(frm) {
     let all_completed = frm.doc.items.every(function(item) {
         return item.percentage_of_completion === 100;
@@ -202,15 +192,39 @@ frappe.ui.form.on('The Subcontracts', {
                 return;
             }
 
-            // التحقق من القيم
             await validate_subcontract_items(contract_name, frm);
         } catch (error) {
             frappe.msgprint(error.message);
-            frappe.validated = false; // منع الحفظ
+            frappe.validated = false; 
         }
     },
 
+    on_submit: async function (frm) {
+        try {
+            const contract_name = frm.doc.contracts;
 
+            if (!contract_name) {
+                return;
+            }
+
+            await update_contract_values(contract_name);
+        } catch (error) {
+            console.error(error);
+        }
+    },
+    // after_save: function(frm) {
+    //     if (frm.doc.net_total !== undefined && frm.doc.remaining_total_amount === frm.doc.net_total) {
+    //         frm.set_value('remaining_total_amount', frm.doc.net_total);
+    //         frm.save(); // حفظ المستند تلقائيًا بعد التحديث
+    //     }
+    // } 
+     after_save: function(frm) {
+            if (frm.doc.remaining_total_amount === 0 && frm.doc.net_total !== undefined && !frm.doc.__remaining_updated) {
+                frm.set_value('remaining_total_amount', frm.doc.net_total);
+                frm.doc.__remaining_updated = true; 
+                frm.save(); 
+            }
+        }
     
 });
 
