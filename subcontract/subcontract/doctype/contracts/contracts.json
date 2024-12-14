@@ -31,19 +31,7 @@
   "payment_sechedule",
   "term_and_conditions_section",
   "terms",
-  "terms_and_conditions_details",
-  "taxes_and_charging_section",
-  "percentage_of_tax_deduction_and_addition",
-  "percentage_of_value_added_tax",
-  "percentage_of_business_insurance",
-  "percentage_of_current_organization",
-  "other_deduction",
-  "column_break_tqna",
-  "tax_deduction_amount",
-  "vat_amount",
-  "business_insurance_amount",
-  "current_organization_amount",
-  "deductions_amount"
+  "terms_and_conditions_details"
  ],
  "fields": [
   {
@@ -186,36 +174,6 @@
    "label": "Terms and Conditions Details"
   },
   {
-   "fieldname": "taxes_and_charging_section",
-   "fieldtype": "Section Break",
-   "label": "Taxes and Charging"
-  },
-  {
-   "fieldname": "percentage_of_tax_deduction_and_addition",
-   "fieldtype": "Percent",
-   "label": "Percentage of Tax Deduction and Addition"
-  },
-  {
-   "fieldname": "percentage_of_value_added_tax",
-   "fieldtype": "Percent",
-   "label": "Percentage of Value Added Tax"
-  },
-  {
-   "fieldname": "percentage_of_business_insurance",
-   "fieldtype": "Percent",
-   "label": "Percentage of Business Insurance "
-  },
-  {
-   "fieldname": "percentage_of_current_organization",
-   "fieldtype": "Percent",
-   "label": "Percentage of Current Organization"
-  },
-  {
-   "fieldname": "other_deduction",
-   "fieldtype": "Data",
-   "label": "Other Deduction"
-  },
-  {
    "fieldname": "name1",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -229,49 +187,10 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break_tqna",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "tax_deduction_amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Tax Deduction Amount",
-   "read_only": 1
-  },
-  {
-   "fieldname": "vat_amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "VAT Amount",
-   "read_only": 1
-  },
-  {
-   "fieldname": "business_insurance_amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Business Insurance Amount",
-   "read_only": 1
-  },
-  {
-   "fieldname": "current_organization_amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Current Organization Amount",
-   "read_only": 1
-  },
-  {
    "fieldname": "grand_total_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Grand Total Amount",
-   "read_only": 1
-  },
-  {
-   "fieldname": "deductions_amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Deductions Amount",
    "read_only": 1
   }
  ],
@@ -283,7 +202,7 @@
    "link_fieldname": "Contracts"
   }
  ],
- "modified": "2024-12-03 15:50:12.544663",
+ "modified": "2024-12-14 16:50:59.666668",
  "modified_by": "Administrator",
  "module": "subcontract",
  "name": "Contracts",
