@@ -183,6 +183,170 @@ function check_completion_percentage(frm) {
 
 // fatma 
 
+// frappe.ui.form.on('The Subcontracts', {
+//     validate: async function (frm) {
+//         try {
+//             const contract_name = frm.doc.contracts;
+
+//             if (!contract_name) {
+//                 return;
+//             }
+
+//             await validate_subcontract_items(contract_name, frm);
+//         } catch (error) {
+//             frappe.msgprint(error.message);
+//             frappe.validated = false; 
+//         }
+//     },
+
+//     on_submit: async function (frm) {
+//         try {
+//             const contract_name = frm.doc.contracts;
+
+//             if (!contract_name) {
+//                 return;
+//             }
+
+//             await update_contract_values(contract_name);
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     },
+//     // after_save: function(frm) {
+//     //     if (frm.doc.net_total !== undefined && frm.doc.remaining_total_amount === frm.doc.net_total) {
+//     //         frm.set_value('remaining_total_amount', frm.doc.net_total);
+//     //         frm.save(); // حفظ المستند تلقائيًا بعد التحديث
+//     //     }
+//     // } 
+//      after_save: function(frm) {
+//             if (frm.doc.remaining_total_amount === 0 && frm.doc.net_total !== undefined && !frm.doc.__remaining_updated) {
+//                 frm.set_value('remaining_total_amount', frm.doc.net_total);
+//                 frm.doc.__remaining_updated = true; 
+//                 frm.save(); 
+//             }
+//         }
+    
+// });
+
+// async function validate_subcontract_items(contract_name, frm) {
+//     try {
+//         const contract_doc = await frappe.db.get_doc('Contracts', contract_name);
+
+//         if (!contract_doc || !contract_doc.table_itfa) {
+//             return;
+//         }
+
+//         const completed_quantities = {};
+//         const completed_amounts = {};
+
+//         if (!frm.doc.items) {
+//             return;
+//         }
+
+//         for (const item of frm.doc.items) {
+//             const item_name = item.item_name;
+
+//             if (!completed_quantities[item_name]) {
+//                 completed_quantities[item_name] = 0;
+//             }
+//             completed_quantities[item_name] += parseFloat(item.quantity) || 0;
+
+//             if (!completed_amounts[item_name]) {
+//                 completed_amounts[item_name] = 0;
+//             }
+//             completed_amounts[item_name] += parseFloat(item.amount) || 0;
+
+//             const contract_row = contract_doc.table_itfa.find(row => row.item_name === item_name);
+//             if (contract_row) {
+//                 const remaining_quantity = Math.max(contract_row.quantity - (completed_quantities[item_name] || 0), 0);
+//                 const remaining_amount = Math.max(contract_row.amount - (completed_amounts[item_name] || 0), 0);
+
+//                 if (item.quantity > remaining_quantity) {
+//                     throw new Error(`الكمية المدخلة (${item.quantity}) أكبر من الكمية المتبقية (${remaining_quantity}) للعقد الرئيسي.`);
+//                 }
+
+//                 if (item.amount > remaining_amount) {
+//                     throw new Error(`المبلغ المدخل (${item.amount}) أكبر من المبلغ المتبقي (${remaining_amount}) للعقد الرئيسي.`);
+//                 }
+//             }
+//         }
+//     } catch (error) {
+//         console.error(error);
+//         throw error;
+//     }
+// }
+
+// async function update_contract_values(contract_name) {
+//     try {
+//         const contract_doc = await frappe.db.get_doc('Contracts', contract_name);
+
+//         if (!contract_doc || !contract_doc.table_itfa) {
+//             return;
+//         }
+
+//         const subcontracts = await frappe.call({
+//             method: 'frappe.client.get_list',
+//             args: {
+//                 doctype: 'The Subcontracts',
+//                 filters: { contracts: contract_name },
+//                 fields: ['name']
+//             }
+//         });
+
+//         if (!subcontracts.message.length) {
+//             return;
+//         }
+
+//         const completed_quantities = {};
+//         const completed_amounts = {};
+
+//         for (const subcontract of subcontracts.message) {
+//             const subcontract_doc = await frappe.db.get_doc('The Subcontracts', subcontract.name);
+
+//             if (!subcontract_doc.items) continue;
+
+//             for (const item of subcontract_doc.items) {
+//                 const item_name = item.item_name;
+
+//                 if (!completed_quantities[item_name]) {
+//                     completed_quantities[item_name] = 0;
+//                 }
+//                 completed_quantities[item_name] += parseFloat(item.quantity) || 0;
+
+//                 if (!completed_amounts[item_name]) {
+//                     completed_amounts[item_name] = 0;
+//                 }
+//                 completed_amounts[item_name] += parseFloat(item.amount) || 0;
+//             }
+//         }
+
+//         for (const row of contract_doc.table_itfa) {
+//             const item_name = row.item_name;
+
+//             // تحديث نسبة الإنجاز
+//             if (contract_doc.docstatus === 1) {
+//                 const total_completed_quantity = completed_quantities[item_name] || 0;
+//                 row.percentage_of_completion = row.quantity > 0
+//                     ? ((total_completed_quantity / row.quantity) * 100).toFixed(2)
+//                     : 0;
+//             }
+//             // تحديث الكمية المتبقية
+//             row.remaining_quantity = Math.max(row.quantity - total_completed_quantity, 0);
+
+//             // تحديث المبلغ المتبقي
+//             const total_completed_amount = completed_amounts[item_name] || 0;
+//             row.remaining_amount = Math.max(row.amount - total_completed_amount, 0);
+//         }
+
+//         await frappe.call({
+//             method: 'frappe.client.save',
+//             args: { doc: contract_doc }
+//         });
+//     } catch (error) {
+//         console.error(error);
+//         frappe.msgprint(`حدث خطأ أثناء تحديث العقد الرئيسي: ${error.message}`);
+//     }
+// }
 frappe.ui.form.on('The Subcontracts', {
     validate: async function (frm) {
         try {
@@ -212,20 +376,14 @@ frappe.ui.form.on('The Subcontracts', {
             console.error(error);
         }
     },
-    // after_save: function(frm) {
-    //     if (frm.doc.net_total !== undefined && frm.doc.remaining_total_amount === frm.doc.net_total) {
-    //         frm.set_value('remaining_total_amount', frm.doc.net_total);
-    //         frm.save(); // حفظ المستند تلقائيًا بعد التحديث
-    //     }
-    // } 
-     after_save: function(frm) {
-            if (frm.doc.remaining_total_amount === 0 && frm.doc.net_total !== undefined && !frm.doc.__remaining_updated) {
-                frm.set_value('remaining_total_amount', frm.doc.net_total);
-                frm.doc.__remaining_updated = true; 
-                frm.save(); 
-            }
+
+    after_save: function(frm) {
+        if (frm.doc.remaining_total_amount === 0 && frm.doc.net_total !== undefined && !frm.doc.__remaining_updated) {
+            frm.set_value('remaining_total_amount', frm.doc.net_total);
+            frm.doc.__remaining_updated = true; 
+            frm.save(); 
         }
-    
+    }
 });
 
 async function validate_subcontract_items(contract_name, frm) {
@@ -325,15 +483,18 @@ async function update_contract_values(contract_name) {
 
             // تحديث نسبة الإنجاز
             const total_completed_quantity = completed_quantities[item_name] || 0;
-            row.percentage_of_completion = row.quantity > 0
-                ? ((total_completed_quantity / row.quantity) * 100).toFixed(2)
-                : 0;
+            const total_completed_amount = completed_amounts[item_name] || 0;
+
+            if (contract_doc.docstatus === 1) {
+                row.percentage_of_completion = row.quantity > 0
+                    ? ((total_completed_quantity / row.quantity) * 100).toFixed(2)
+                    : 0;
+            }
 
             // تحديث الكمية المتبقية
             row.remaining_quantity = Math.max(row.quantity - total_completed_quantity, 0);
 
             // تحديث المبلغ المتبقي
-            const total_completed_amount = completed_amounts[item_name] || 0;
             row.remaining_amount = Math.max(row.amount - total_completed_amount, 0);
         }
 
