@@ -220,6 +220,45 @@
 //     }}},
 
 frappe.ui.form.on('Contracts', {
+        // Trigger calculations when relevant fields change
+        custom_recovery_advance_5: function(frm) {
+            calculate_recovery_advance(frm);
+        },
+        total_amount: function(frm) {
+            calculate_recovery_advance(frm);
+        },
+        custom_vat_15: function(frm) {
+            calculate_total_vat1(frm);
+        },
+        custom_amount_after_ap: function(frm) {
+            calculate_total_vat1(frm);
+            calculate_total_including_vat(frm);
+        },
+        custom_total_vat1: function(frm) {
+            calculate_total_including_vat(frm);
+        },
+        custom_retention_10: function(frm) {
+            calculate_retention(frm);
+        },
+        custom_total_including_vat: function(frm) {
+            calculate_retention(frm);
+            calculate_net_current_payment(frm);
+        },
+        custom_retention: function(frm) {
+            calculate_total_deduction(frm);
+        },
+        custom_debit_note_1: function(frm) {
+            calculate_total_deduction(frm);
+        },
+        custom_debit_note_2: function(frm) {
+            calculate_total_deduction(frm);
+        },
+        custom_debit_note_3: function(frm) {
+            calculate_total_deduction(frm);
+        },
+        custom_total_deduction: function(frm) {
+            calculate_net_current_payment(frm);
+        },
     onload: function (frm) {
         // جلب قيمة الشركة من الإعدادات
         frappe.db.get_single_value('Construction Contract Setup', 'company')
@@ -228,6 +267,8 @@ frappe.ui.form.on('Contracts', {
                     frm.set_value('company', value);
                 }
             });
+        // Ensure all calculated fields are read-only when the form loads
+        set_fields_read_only(frm);
     },
 
     refresh: function (frm) {
@@ -295,6 +336,88 @@ frappe.ui.form.on('Contracts', {
         }
     }
 });
+
+// Function to calculate recovery advance and amount after advance payment
+function calculate_recovery_advance(frm) {
+    let total_amount = frm.doc.total_amount || 0;
+    let recovery_percent = frm.doc.custom_recovery_advance_5 || 0;
+
+    let recovery_advance = (total_amount * recovery_percent) / 100;
+    frm.set_value('custom_total_recover_advance', recovery_advance);
+
+    let amount_after_ap = total_amount - recovery_advance;
+    frm.set_value('custom_amount_after_ap', amount_after_ap);
+
+    set_fields_read_only(frm);
+}
+
+// Function to calculate total VAT
+function calculate_total_vat1(frm) {
+    let vat_percentage = frm.doc.custom_vat_15 || 0;
+    let amount_after_ap = frm.doc.custom_amount_after_ap || 0;
+
+    let total_vat1 = (amount_after_ap * vat_percentage) / 100;
+    frm.set_value('custom_total_vat1', total_vat1);
+
+    set_fields_read_only(frm);
+}
+
+// Function to calculate total including VAT
+function calculate_total_including_vat(frm) {
+    let amount_after_ap = frm.doc.custom_amount_after_ap || 0;
+    let total_vat1 = frm.doc.custom_total_vat1 || 0;
+
+    let total_including_vat = amount_after_ap + total_vat1;
+    frm.set_value('custom_total_including_vat', total_including_vat);
+
+    set_fields_read_only(frm);
+}
+
+// Function to calculate retention
+function calculate_retention(frm) {
+    let total_including_vat = frm.doc.custom_total_including_vat || 0;
+    let retention_percent = frm.doc.custom_retention_10 || 0;
+
+    let retention_amount = (total_including_vat * retention_percent) / 100;
+    frm.set_value('custom_retention', retention_amount);
+
+    set_fields_read_only(frm);
+}
+
+// Function to calculate total deduction
+function calculate_total_deduction(frm) {
+    let retention = frm.doc.custom_retention || 0;
+    let debit_note_1 = frm.doc.custom_debit_note_1 || 0;
+    let debit_note_2 = frm.doc.custom_debit_note_2 || 0;
+    let debit_note_3 = frm.doc.custom_debit_note_3 || 0;
+
+    let total_deduction = retention + debit_note_1 + debit_note_2 + debit_note_3;
+    frm.set_value('custom_total_deduction', total_deduction);
+
+    set_fields_read_only(frm);
+}
+
+// Function to calculate net current payment
+function calculate_net_current_payment(frm) {
+    let total_including_vat = frm.doc.custom_total_including_vat || 0;
+    let total_deduction = frm.doc.custom_total_deduction || 0;
+
+    let net_current_payment = total_including_vat - total_deduction;
+    frm.set_value('custom_net_current_payment', net_current_payment);
+
+    set_fields_read_only(frm);
+}
+
+// Function to set fields as read-only
+function set_fields_read_only(frm) {
+    frm.set_df_property('custom_total_recover_advance', 'read_only', 1);
+    frm.set_df_property('custom_amount_after_ap', 'read_only', 1);
+    frm.set_df_property('custom_total_vat1', 'read_only', 1);
+    frm.set_df_property('custom_total_including_vat', 'read_only', 1);
+    frm.set_df_property('custom_retention', 'read_only', 1);
+    frm.set_df_property('custom_total_deduction', 'read_only', 1);
+    frm.set_df_property('custom_net_current_payment', 'read_only', 1);
+}
 
 // حساب الإجمالي تلقائيًا عند تعديل الحقول داخل الجدول الفرعي
 frappe.ui.form.on('Contracts Items', {

@@ -26,6 +26,22 @@
   "table_itfa",
   "total_amount",
   "grand_total_amount",
+  "section_break_tycz",
+  "custom_recovery_advance_5",
+  "custom_vat_15",
+  "custom_retention_10",
+  "custom_debit_note_1",
+  "column_break_njzu",
+  "custom_total_recover_advance",
+  "custom_total_vat1",
+  "custom_retention",
+  "custom_debit_note_2",
+  "column_break_dqex",
+  "custom_amount_after_ap",
+  "custom_total_including_vat",
+  "custom_total_deduction",
+  "custom_debit_note_3",
+  "custom_net_current_payment",
   "payment_terms_section",
   "payment_terms_template",
   "payment_sechedule",
@@ -192,6 +208,83 @@
    "in_list_view": 1,
    "label": "Grand Total Amount",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_tycz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "custom_recovery_advance_5",
+   "fieldtype": "Percent",
+   "label": "Recovery Advance percentage"
+  },
+  {
+   "fieldname": "custom_vat_15",
+   "fieldtype": "Percent",
+   "label": "VAT percentage "
+  },
+  {
+   "fieldname": "custom_retention_10",
+   "fieldtype": "Percent",
+   "label": "Retention percentage "
+  },
+  {
+   "fieldname": "custom_debit_note_1",
+   "fieldtype": "Float",
+   "label": "Debit Note 1 "
+  },
+  {
+   "fieldname": "column_break_njzu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "custom_total_recover_advance",
+   "fieldtype": "Float",
+   "label": "Total Recover advance "
+  },
+  {
+   "fieldname": "custom_total_vat1",
+   "fieldtype": "Float",
+   "label": "Total VAT "
+  },
+  {
+   "fieldname": "custom_retention",
+   "fieldtype": "Float",
+   "label": "Retention "
+  },
+  {
+   "fieldname": "custom_debit_note_2",
+   "fieldtype": "Float",
+   "label": "Debit Note 2 "
+  },
+  {
+   "fieldname": "column_break_dqex",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "custom_amount_after_ap",
+   "fieldtype": "Float",
+   "label": "Amount after R.A "
+  },
+  {
+   "fieldname": "custom_total_including_vat",
+   "fieldtype": "Float",
+   "label": "Total Including VAT "
+  },
+  {
+   "fieldname": "custom_total_deduction",
+   "fieldtype": "Float",
+   "label": "Total Deduction "
+  },
+  {
+   "fieldname": "custom_debit_note_3",
+   "fieldtype": "Float",
+   "label": "Debit Note 3 "
+  },
+  {
+   "fieldname": "custom_net_current_payment",
+   "fieldtype": "Float",
+   "label": "Net Current Payment "
   }
  ],
  "index_web_pages_for_search": 1,
@@ -202,7 +295,7 @@
    "link_fieldname": "Contracts"
   }
  ],
- "modified": "2024-12-14 16:50:59.666668",
+ "modified": "2024-12-17 12:07:20.914944",
  "modified_by": "Administrator",
  "module": "subcontract",
  "name": "Contracts",
