@@ -89,17 +89,13 @@ class Contracts(Document):
 
 @frappe.whitelist()
 def move_to_subcontracts(contract_name):
-    # التحقق من وجود العقد قبل استرجاعه
     if not frappe.db.exists('Contracts', contract_name):
         frappe.throw(f"Contract with name {contract_name} does not exist.")
 
-    # استرجاع المستند من جدول Contracts
     contract_doc = frappe.get_doc('Contracts', contract_name)
 
-    # إنشاء مستند جديد في جدول The Subcontracts
     subcontract_doc = frappe.new_doc('The Subcontracts')
 
-    # نقل البيانات من Contracts إلى The Subcontracts
     subcontract_doc.contracts = contract_doc.name
     subcontract_doc.contractor_type = contract_doc.contractor_type or "Default Contractor Type"
     subcontract_doc.contractor = contract_doc.contractor
@@ -108,12 +104,9 @@ def move_to_subcontracts(contract_name):
     subcontract_doc.posting_date = contract_doc.posting_date
     subcontract_doc.company = contract_doc.company
 
-    # التعامل مع حقل الـ child table "contract-item"
     for child_row in contract_doc.table_itfa:
-        # إضافة شرط للتحقق إذا كانت percentage_of_completion لا تساوي 100
         if child_row.percentage_of_completion != 100:
             subcontract_child_row = subcontract_doc.append('items', {})
-            # نسخ البيانات من child row في Contracts إلى The Subcontracts
             subcontract_child_row.business_item = child_row.business_item
             subcontract_child_row.item_description = child_row.item_description
             subcontract_child_row.remaining_quantity = child_row.remaining_quantity
@@ -123,13 +116,9 @@ def move_to_subcontracts(contract_name):
             subcontract_child_row.remaining_amount = child_row.remaining_amount
             subcontract_child_row.rate = child_row.rate
             subcontract_child_row.item_name = child_row.item_name or "Default Item Name"
-        else:
-            frappe.msgprint(f"صف العنصر {child_row.item_name} لم يتم نقله لأن النسبة المئوية للإكمال هي 100.")
-
-    # حفظ المستند الجديد في The Subcontracts
+    
     subcontract_doc.insert()
 
-    # إرجاع اسم المستند الجديد
     return subcontract_doc.name
 
 

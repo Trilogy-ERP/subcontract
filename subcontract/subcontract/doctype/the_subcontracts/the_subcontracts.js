@@ -377,11 +377,19 @@ frappe.ui.form.on('The Subcontracts', {
         }
     },
 
+    // after_save: function(frm) {
+    //     if (frm.doc.remaining_total_amount === 0 && frm.doc.net_total !== undefined && !frm.doc.__remaining_updated) {
+    //         frm.set_value('remaining_total_amount', frm.doc.net_total);
+    //         frm.doc.__remaining_updated = true; 
+    //         frm.save(); 
+    //     }
+    // }
+
     after_save: function(frm) {
-        if (frm.doc.remaining_total_amount === 0 && frm.doc.net_total !== undefined && !frm.doc.__remaining_updated) {
+        if (!frm.doc.__is_submitted && frm.doc.remaining_total_amount === 0) {
             frm.set_value('remaining_total_amount', frm.doc.net_total);
-            frm.doc.__remaining_updated = true; 
-            frm.save(); 
+            frm.save();
+            frm.doc.__is_submitted = true;
         }
     }
 });
