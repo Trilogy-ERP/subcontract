@@ -49,51 +49,27 @@ class CustomPaymentEntry(PaymentEntry):
                 )
 
         super().validate()
-@frappe.whitelist()
-def make_payment_entry(source_name, target_doc=None):
-    def update_item(source, target, source_parent):
-        target.party_type = source.contractor_type
-        target.party = source.contractor
-        target.party_name = source.contractor
-        target.custom_total_amount = source.remaining_total_amount
-        target.payment_type = "Pay"
+# @frappe.whitelist()
+# def make_payment_entry(source_name, target_doc=None):
+#     def update_item(source, target, source_parent):
+#         target.party_type = source.contractor_type
+#         target.party = source.contractor
+#         target.party_name = source.contractor
+#         target.custom_total_amount = source.remaining_total_amount
+#         target.payment_type = "Pay"
 
-    doc = get_mapped_doc(
-        "The Subcontracts", 
-        source_name, 
-        {
-            "The Subcontracts": { 
-                "doctype": "Payment Entry", 
-                "field_map": {
-                },
-                "postprocess": update_item, 
-            },
-        },
-        target_doc
-    )
+#     doc = get_mapped_doc(
+#         "The Subcontracts", 
+#         source_name, 
+#         {
+#             "The Subcontracts": { 
+#                 "doctype": "Payment Entry", 
+#                 "field_map": {
+#                 },
+#                 "postprocess": update_item, 
+#             },
+#         },
+#         target_doc
+#     )
 
-    return doc
-
-def payment_entry_onload(doc, method):
-    # التأكد من أن هناك قيمة لحقل custom_subcontract
-    if doc.custom_subcontract:
-        # جلب البيانات من نموذج 'The Subcontracts'
-        subcontract = frappe.get_doc('The Subcontracts', doc.custom_subcontract)
-        
-        if subcontract:
-            # التأكد من أن قيم contractor و contractor_type صحيحة
-            contractor = subcontract.contractor
-            contractor_type = subcontract.contractor_type
-
-            # تعيين القيم إلى الحقول في نموذج 'Payment Entry'
-            doc.party_type = contractor_type
-            doc.party = contractor
-
-            # حفظ السجلات بعد التحديث
-            doc.save()
-
-            # إعادة تحميل الحقول
-            frappe.db.commit()  # تأكيد التحديث في قاعدة البيانات
-
-            # إرسال إشعار بنجاح التحديث
-            frappe.msgprint(f"تم تعيين قيمة المقاول: {contractor} و نوع المقاول: {contractor_type}")
+#     return doc
