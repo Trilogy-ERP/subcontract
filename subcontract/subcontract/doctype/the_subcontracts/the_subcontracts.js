@@ -15,22 +15,22 @@ frappe.ui.form.on('The Subcontracts', {
                 };
             }
         });
-        if (frm.doc.docstatus == 1) { 
-            frm.add_custom_button(__('Payment Entry'), function () {
-                frappe.call({
-                    method: "subcontract.overrides.payment_entry.make_payment_entry",
-                    args: {
-                        source_name: frm.doc.name  
-                    },
-                    callback: function (r) {
-                        if (r.message) {
-                            frappe.model.sync(r.message);
-                            frappe.set_route('Form', r.message.doctype, r.message.name);
-                        }
-                    }
-                });
-            }, __('Create'));
-        }
+        // if (frm.doc.docstatus == 1) { 
+        //     frm.add_custom_button(__('Payment Entry'), function () {
+        //         frappe.call({
+        //             method: "subcontract.overrides.payment_entry.make_payment_entry",
+        //             args: {
+        //                 source_name: frm.doc.name  
+        //             },
+        //             callback: function (r) {
+        //                 if (r.message) {
+        //                     frappe.model.sync(r.message);
+        //                     frappe.set_route('Form', r.message.doctype, r.message.name);
+        //                 }
+        //             }
+        //         });
+        //     }, __('Create'));
+        // }
        
         // function check_dashboard(attempts) {
         //     console.log("Checking Dashboard:", frm.dashboard);

@@ -7,7 +7,9 @@ app_license = "mit"
 
 doctype_js = {
     "The Subcontracts": "public/js/the_subcontracts.js",
-    "Payment Entry": "public/js/update_payment.js"
+    # "Payment Entry": "public/js/update_payment.js"
+    "Payment Entry": "public/js/payment_entry.js",
+
 }
 
 override_doctype_class = {
@@ -19,6 +21,8 @@ override_whitelisted_methods = {
     # "subcontract.subcontract.overrides.payment_entry.CustomPaymentEntry.on_submit"
 
 }
+
+
 # override_doctype_dashboards = {
 #     "The Subcontracts": "subcontract.overrides.payment_entry"
 # }

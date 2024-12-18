@@ -74,3 +74,26 @@ def make_payment_entry(source_name, target_doc=None):
 
     return doc
 
+def payment_entry_onload(doc, method):
+    # التأكد من أن هناك قيمة لحقل custom_subcontract
+    if doc.custom_subcontract:
+        # جلب البيانات من نموذج 'The Subcontracts'
+        subcontract = frappe.get_doc('The Subcontracts', doc.custom_subcontract)
+        
+        if subcontract:
+            # التأكد من أن قيم contractor و contractor_type صحيحة
+            contractor = subcontract.contractor
+            contractor_type = subcontract.contractor_type
+
+            # تعيين القيم إلى الحقول في نموذج 'Payment Entry'
+            doc.party_type = contractor_type
+            doc.party = contractor
+
+            # حفظ السجلات بعد التحديث
+            doc.save()
+
+            # إعادة تحميل الحقول
+            frappe.db.commit()  # تأكيد التحديث في قاعدة البيانات
+
+            # إرسال إشعار بنجاح التحديث
+            frappe.msgprint(f"تم تعيين قيمة المقاول: {contractor} و نوع المقاول: {contractor_type}")

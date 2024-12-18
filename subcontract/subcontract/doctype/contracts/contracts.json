@@ -211,7 +211,8 @@
   },
   {
    "fieldname": "section_break_tycz",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Calculating contracting ratios"
   },
   {
    "fieldname": "custom_recovery_advance_5",
@@ -295,7 +296,7 @@
    "link_fieldname": "Contracts"
   }
  ],
- "modified": "2024-12-17 12:07:20.914944",
+ "modified": "2024-12-17 12:25:05.130096",
  "modified_by": "Administrator",
  "module": "subcontract",
  "name": "Contracts",
